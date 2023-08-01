@@ -39,7 +39,7 @@ public class CalorieCounter {
                 double carbs = scanner.nextDouble();
                 double proteins = scanner.nextDouble();
                 Product newProduct = new Product(name, fats, carbs, proteins);
-                boolean result = productCatalog.addProduct(newProduct);
+                boolean resultt = productCatalog.addProduct(newProduct);
                 //
 
         }
