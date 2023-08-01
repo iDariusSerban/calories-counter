@@ -20,29 +20,55 @@ public class CalorieCounter {
         do {
             printMenu();
             option = scanner.nextInt();
-            performSelectedAction(option, productCatalog,scanner);
+            performSelectedAction(option, productCatalog, scanner);
 
-        }while (option!=6);
+        } while (option != 6 && option < 7);
     }
-    public static void printMenu (){
+
+    public static void printMenu() {
+        System.out.println("MENIU:");
+        System.out.println("1. Adauga produs in calculator si calculeaza-i caloriile");
+        System.out.println("2. Calculeaza caloriile pentru un produs fara a fi adaugat in catalog");
+        System.out.println("3. Afiseaza toate produsele din catalog si caloriile pentru fiecare");
+        System.out.println("4. Sterge un produs din catalog");
+        System.out.println("5. Gaseste produs dupa nume");
+        System.out.println("6. EXIT (Iesi din aplicatie)");
+        System.out.println("----------------------------------------------------------------");
+        System.out.println("Alege actiunea cu numarul:");
+
 
     }
-    public static void performSelectedAction (int option, ProductCatalog productCatalog, Scanner scanner){
-        switch (option){
+
+    public static void performSelectedAction(int option, ProductCatalog productCatalog, Scanner scanner) {
+        switch (option) {
             case 1:
                 // cimim de la tastatura detaliile produsului
                 // ne instantiem un produs cu aceste detalii -creem un obiect
                 //pasam obiectul creat la metoda addProduct
-
-                String name = scanner.nextLine();
-                double fats = scanner.nextDouble();
-                double carbs = scanner.nextDouble();
-                double proteins = scanner.nextDouble();
-                Product newProduct = new Product(name, fats, carbs, proteins);
-                boolean result = productCatalog.addProduct(newProduct);
-                boolean newFeature;
-                //
-
+                productCatalog.addProduct(readProduct());
+                System.out.println("Produsul a fost adaugat in lista.");
+                break;
+            case 2:
+                Product product = readProduct();
+                double calories =  product.computeCalories(product.fats, product.carbs, product.proteins);
+                System.out.println("Produsul are " + calories + " calorii");
+                break;
+            default:
+                //inchide programul
         }
+    }
+
+    public static Product readProduct() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Numele produsului: ");
+        String name = scanner.nextLine();
+        System.out.println("Grasimi: ");
+        double fats = scanner.nextDouble();
+        System.out.println("Carbohidrati: ");
+        double carbs = scanner.nextDouble();
+        System.out.println("Proteine: ");
+        double proteins = scanner.nextDouble();
+        return new Product(name, fats, carbs, proteins);
+
     }
 }

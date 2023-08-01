@@ -11,11 +11,10 @@ public class Product {
         this.fats = fats;
         this.carbs = carbs;
         this.proteins = proteins;
-        this.calories = computeCalories(fats,carbs,proteins);
+        this.calories = computeCalories(fats, carbs, proteins);
     }
-    public static double computeCalories (double fats, double carbs, double proteins){
-        double calories = 0;
 
-        return calories;
+    public double computeCalories(double fats, double carbs, double proteins) {
+        return (fats * 9) + (carbs * 4) + (proteins * 4);
     }
 }
