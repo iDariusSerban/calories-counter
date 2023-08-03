@@ -22,7 +22,9 @@ public class CalorieCounter {
             option = scanner.nextInt();
             performSelectedAction(option, productCatalog, scanner);
 
-        } while (option != 6 && option < 7);
+        } while (option < 7);
+
+
     }
 
     public static void printMenu() {
@@ -53,6 +55,15 @@ public class CalorieCounter {
                 double calories =  product.computeCalories(product.fats, product.carbs, product.proteins);
                 System.out.println("Produsul are " + calories + " calorii");
                 break;
+            case 3:
+                productCatalog.printProducts();
+                break;
+            case 4:
+                System.out.println("ce produs doresti sa stregi?");
+                productCatalog.deleteProduct(scanner.nextLine());
+            case 5:
+                System.out.println("ce produs cauti?");
+                productCatalog.getProductByName(scanner.nextLine());
             default:
                 //inchide programul
         }

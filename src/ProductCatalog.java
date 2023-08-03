@@ -11,10 +11,10 @@ public class ProductCatalog {
         this.numberOfProducts = 0;
     }
 
-    public void prinProducts() {
+    public void printProducts() {
         for (int i = 0; i < products.length; i++)
             if (products[i] != null) {
-                System.out.println(products[i]);
+                System.out.println(products[i].name);
             } else {
                 break;
             }
@@ -26,7 +26,7 @@ public class ProductCatalog {
             // parcurg cu i tot sirul pana gasesc un loc liber
             // inserez noua valoare in locul liber
 
-            if (products == null) {   // not sure
+            if (products[i] == null) {   // not sure
                 products[i] = product;
             } else {
                 return false;
