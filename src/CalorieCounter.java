@@ -48,7 +48,6 @@ public class CalorieCounter {
                 // ne instantiem un produs cu aceste detalii -creem un obiect
                 //pasam obiectul creat la metoda addProduct
                 productCatalog.addProduct(readProduct());
-                System.out.println("Produsul a fost adaugat in lista.");
                 break;
             case 2:
                 Product product = readProduct();

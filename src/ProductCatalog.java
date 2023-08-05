@@ -12,27 +12,33 @@ public class ProductCatalog {
     }
 
     public void printProducts() {
-        for (int i = 0; i < products.length; i++)
-            if (products[i] != null) {
-                System.out.println(products[i].name);
-            } else {
-                break;
-            }
-
+        for (int i = 0; i < numberOfProducts; i++) {
+            System.out.println(products[i].toString());
+        }
     }
 
     public boolean addProduct(Product product) {
-        for (int i = 0; i < products.length; i++) {
-            // parcurg cu i tot sirul pana gasesc un loc liber
-            // inserez noua valoare in locul liber
 
-            if (products[i] == null) {   // not sure
-                products[i] = product;
-            } else {
-                return false;
+        if (isProductInList(product) || maxNumberOfProducts == numberOfProducts) {
+            System.out.println("Produsul este deja in lista");
+            return false;
+        } else {
+            products[numberOfProducts++] = product;
+            System.out.println("Produsul a fost adaugat in lista");
+            return true;
+        }
+    }
+
+    public boolean isProductInList(Product product) {
+        if (numberOfProducts == 0) {
+            return false;
+        }
+        for (int i = 0; i < products.length; i++) {
+            if (product.name.equals(products[i].name)) {
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     public Product getProductByName(String name) {
