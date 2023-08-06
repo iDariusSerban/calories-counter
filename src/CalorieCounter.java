@@ -14,7 +14,8 @@ public class CalorieCounter {
 
         ProductCatalog productCatalog = new ProductCatalog();
         Scanner scanner = new Scanner(System.in);
-
+        Product product = new Product("apa", 5, 5, 5);
+        productCatalog.addProduct(product);
         int option = 0;
 
         do {
@@ -22,7 +23,7 @@ public class CalorieCounter {
             option = scanner.nextInt();
             performSelectedAction(option, productCatalog, scanner);
 
-        } while (option < 7);
+        } while (option < 6 && option > 0);
 
 
     }
@@ -51,7 +52,7 @@ public class CalorieCounter {
                 break;
             case 2:
                 Product product = readProduct();
-                double calories =  product.computeCalories(product.fats, product.carbs, product.proteins);
+                double calories = product.computeCalories(product.fats, product.carbs, product.proteins);
                 System.out.println("Produsul are " + calories + " calorii");
                 break;
             case 3:
@@ -59,12 +60,19 @@ public class CalorieCounter {
                 break;
             case 4:
                 System.out.println("ce produs doresti sa stregi?");
-                productCatalog.deleteProduct(scanner.nextLine());
+                if (productCatalog.deleteProduct()) {
+                    System.out.println("Produsul a fost sters");
+                } else {
+                    System.out.println("Produsul nu a fost gasit");
+                }
+                break;
             case 5:
                 System.out.println("ce produs cauti?");
-                productCatalog.getProductByName(scanner.nextLine());
+                //  String searchedProduct = scanner.nextLine();
+                System.out.println(productCatalog.getProductByName());
+                break;
             default:
-                //inchide programul
+                System.out.println("Aplcatia s-a inchis");
         }
     }
 

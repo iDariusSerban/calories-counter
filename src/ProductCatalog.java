@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class ProductCatalog {
 
     Product[] products;
@@ -12,8 +14,13 @@ public class ProductCatalog {
     }
 
     public void printProducts() {
-        for (int i = 0; i < numberOfProducts; i++) {
-            System.out.println(products[i].toString());
+        if (numberOfProducts == 0) {
+            System.out.println("Lista este goala.");
+
+        } else {
+            for (int i = 0; i < numberOfProducts; i++) {
+                System.out.println(products[i].toString());
+            }
         }
     }
 
@@ -33,7 +40,7 @@ public class ProductCatalog {
         if (numberOfProducts == 0) {
             return false;
         }
-        for (int i = 0; i < products.length; i++) {
+        for (int i = 0; i < numberOfProducts; i++) {
             if (product.name.equals(products[i].name)) {
                 return true;
             }
@@ -41,28 +48,35 @@ public class ProductCatalog {
         return false;
     }
 
-    public Product getProductByName(String name) {
+    public Product getProductByName() {
         //cautam produsul in lista si il returnam
-        for (int i = 0; i < products.length; i++) {
+        Scanner scanner = new Scanner(System.in);
+        String name = scanner.nextLine();
+        for (int i = 0; i < numberOfProducts; i++) {
             //daca numele produsului este name returnam produsul
-            if (products[i].name == name) {
+            if (products[i].name.toString().equals(name)) {
                 return products[i];
+            } else {
+                System.out.println("Produsul nu a fost gasit");
+                return null;
             }
         }
         return null;
     }
 
-    public boolean deleteProduct(String name) {
+    public boolean deleteProduct() {
         //cautam produsul dupa nume
-        for (int i = 0; i < products.length; i++) {
-            if (products[i].name == name) {
+        Scanner scanner = new Scanner(System.in);
+        String name = scanner.nextLine();
+        for (int i = 0; i < numberOfProducts; i++) {
+            if (products[i].name.toString().equals(name)) {
                 //stergem produsul
                 products[i] = null;
-            } else {
-                return false;
+                numberOfProducts --;
+                return true;
             }
         }
-        return true;
+        return false;
 
     }
 }
