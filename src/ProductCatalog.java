@@ -56,11 +56,9 @@ public class ProductCatalog {
             //daca numele produsului este name returnam produsul
             if (products[i].name.toString().equals(name)) {
                 return products[i];
-            } else {
-                System.out.println("Produsul nu a fost gasit");
-                return null;
             }
         }
+        System.out.println("Produsul nu a fost gasit");
         return null;
     }
 
@@ -72,7 +70,12 @@ public class ProductCatalog {
             if (products[i].name.toString().equals(name)) {
                 //stergem produsul
                 products[i] = null;
-                numberOfProducts --;
+                numberOfProducts--;
+                // P1 P2 null P4 P5 P6
+                for (int j = i; j < numberOfProducts; j++) {
+                    products[j] = products[j + 1];
+                }
+
                 return true;
             }
         }
