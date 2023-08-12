@@ -20,12 +20,12 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" +
+        return "Product " +
                 "name='" + name + '\'' +
                 ", fats=" + fats +
                 ", carbs=" + carbs +
                 ", proteins=" + proteins +
                 ", calories=" + calories +
-                '}';
+                ' ';
     }
 }

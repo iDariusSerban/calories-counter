@@ -23,7 +23,7 @@ public class CalorieCounter {
             option = scanner.nextInt();
             performSelectedAction(option, productCatalog, scanner);
 
-        } while (option < 6 && option > 0);
+        } while (option != 6);
 
 
     }
@@ -45,14 +45,18 @@ public class CalorieCounter {
     public static void performSelectedAction(int option, ProductCatalog productCatalog, Scanner scanner) {
         switch (option) {
             case 1:
-                // cimim de la tastatura detaliile produsului
-                // ne instantiem un produs cu aceste detalii -creem un obiect
-                //pasam obiectul creat la metoda addProduct
-                productCatalog.addProduct(readProduct());
+                Product productadded = readProduct();
+                if (productCatalog.addProduct(productadded)) {
+                    System.out.println("Produsul a fost adaugat in lista");
+                } else {
+                    System.out.println("Produsul este deja in lista");
+                }
                 break;
             case 2:
                 Product product = readProduct();
+
                 double calories = product.computeCalories(product.fats, product.carbs, product.proteins);
+
                 System.out.println("Produsul are " + calories + " calorii");
                 break;
             case 3:
@@ -60,20 +64,30 @@ public class CalorieCounter {
                 break;
             case 4:
                 System.out.println("ce produs doresti sa stregi?");
-                if (productCatalog.deleteProduct()) {
+                String name = scanner.next();
+
+                if (productCatalog.deleteProduct(name)) {
                     System.out.println("Produsul a fost sters");
                 } else {
                     System.out.println("Produsul nu a fost gasit");
                 }
                 break;
             case 5:
-                System.out.println("ce produs cauti?");
-                //  String searchedProduct = scanner.nextLine();
-                System.out.println(productCatalog.getProductByName());
+                System.out.println("Ce produs cauti?");
+                String searchedProduct = scanner.next();
+                Product foundProduct = productCatalog.searchProduct(searchedProduct);
+                if (foundProduct == null) {
+                    System.out.println("Produsul nu este in lista.");
+                } else {
+                    System.out.println(foundProduct);
+                }
                 break;
-            default:
+            case 6:
                 System.out.println("Aplcatia s-a inchis");
+            default:
+                System.out.println("Optiune invalida. Reintroduceti optiunea.");
         }
+
     }
 
     public static Product readProduct() {

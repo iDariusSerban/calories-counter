@@ -1,4 +1,3 @@
-import java.util.Scanner;
 
 public class ProductCatalog {
 
@@ -26,56 +25,35 @@ public class ProductCatalog {
 
     public boolean addProduct(Product product) {
 
-        if (isProductInList(product) || maxNumberOfProducts == numberOfProducts) {
-            System.out.println("Produsul este deja in lista");
+        if (searchProduct(product.name) != null || maxNumberOfProducts == numberOfProducts) {
             return false;
         } else {
             products[numberOfProducts++] = product;
-            System.out.println("Produsul a fost adaugat in lista");
             return true;
         }
     }
 
-    public boolean isProductInList(Product product) {
+    public Product searchProduct(String productName) {
         if (numberOfProducts == 0) {
-            return false;
+            return null;
         }
         for (int i = 0; i < numberOfProducts; i++) {
-            if (product.name.equals(products[i].name)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public Product getProductByName() {
-        //cautam produsul in lista si il returnam
-        Scanner scanner = new Scanner(System.in);
-        String name = scanner.nextLine();
-        for (int i = 0; i < numberOfProducts; i++) {
-            //daca numele produsului este name returnam produsul
-            if (products[i].name.toString().equals(name)) {
+            if (productName.equals(products[i].name)) {
                 return products[i];
             }
         }
-        System.out.println("Produsul nu a fost gasit");
         return null;
     }
 
-    public boolean deleteProduct() {
-        //cautam produsul dupa nume
-        Scanner scanner = new Scanner(System.in);
-        String name = scanner.nextLine();
+
+    public boolean deleteProduct(String productName) {
         for (int i = 0; i < numberOfProducts; i++) {
-            if (products[i].name.toString().equals(name)) {
-                //stergem produsul
-                products[i] = null;
+            if (products[i].name.equals(productName)) {
                 numberOfProducts--;
-                // P1 P2 null P4 P5 P6
                 for (int j = i; j < numberOfProducts; j++) {
                     products[j] = products[j + 1];
                 }
-
+                products[numberOfProducts] = null;
                 return true;
             }
         }
